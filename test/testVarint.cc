@@ -23,8 +23,9 @@ void show(char *z, int n);
  */
 int main(int argc, char** argv) {
     uint64 input = 10;
-    uchar *output;
-    output = (uchar*)malloc(sizeof(uchar)*9);
+//    uchar *output;
+//    output = (uchar*)malloc(sizeof(uchar)*9);
+    uchar output[9];
     
     int osz = Varint::uint64ToVarint(output, input);
     show((char*)output, osz);

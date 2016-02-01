@@ -25,10 +25,11 @@ int main(int argc, char** argv) {
     kvToCSV kvt;
     kvt.init();
     
-    for (int i=0; i<1000; i++) {
-         kvt.outputCSV();
+    if (kvt.outputCSV() != 0 ) {
+        cout<<"outputCSV failed!";
+    }else {
+        cout<<"outputCSV success!";
     }
-   
     return 0;
 }
 

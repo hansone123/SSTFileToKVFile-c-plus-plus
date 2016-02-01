@@ -32,8 +32,8 @@ testKVProvider$(EXE):
 	g++ -o $(TOP)/test/testKVProvider$(EXE) $(TOP)/test/testKVProvider.cc $(HDR) liblptc.a $(LIBPTHREAD) $(LIBLEVELDB)
 testKVToCSV$(EXE):
 	g++ -o $(TOP)/test/testKVToCSV$(EXE) $(TOP)/test/testKVToCSV.cc $(HDR) liblptc.a $(LIBPTHREAD) $(LIBLEVELDB)
-main$(EXE):
-	g++ -o $(TOP)/test/main$(EXE) $(TOP)/test/main.cc $(HDR) liblptc.a $(LIBPTHREAD) $(LIBLEVELDB)
+testVarint$(EXE):
+	g++ -o $(TOP)/test/testVarint$(EXE) $(TOP)/test/testVarint.cc $(HDR) liblptc.a $(LIBPTHREAD) $(LIBLEVELDB)
 	
 clean:
 	rm $(TOP)/test/*$(EXE)

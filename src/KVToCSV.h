@@ -29,13 +29,12 @@ public:
     int outputCSV();    
     
 private:
-    char *addLen(int &rsz, char* input, int &isz);
     string getTime();
     string genCSVFileName();
     string getInputFile();  
     void setInputPath(string path);
-    void setOutputPath(string path);
-    
+    void setOutputFolder(string path);
+    void createOuputFolder(string p);
     
 };
 
