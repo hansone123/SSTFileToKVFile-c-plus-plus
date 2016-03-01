@@ -5,15 +5,14 @@
  */
 
 /* 
- * File:   testKVToCSV.cc
- * Author: hanson
+ * File:   main.cc
+ * Author: hansone123
  *
- * Created on January 28, 2016, 12:26 AM
+ * Created on March 1, 2016, 4:21 AM
  */
 
 #include <cstdlib>
-#include <iostream>
-#include "../src/KVToCSV.h"
+#include "../src/FileObserver.h"
 
 using namespace std;
 
@@ -22,14 +21,11 @@ using namespace std;
  */
 int main(int argc, char** argv) {
     
-    kvToCSV kvt;
-    kvt.init();
-    
-    if (kvt.outputCSV() != 0 ) {
-        cout<<"output kvfile failed!";
-    }else {
-        cout<<"output kvfile success!";
-    }
+    FileObserver *fs = new FileObserver();
+    if (!fs->setValidDirectoryPath("/tmp/SSTFiles"))
+        return 1;
+    fs->keepWatchOnDirectoryAndDoJob();
+    delete fs;
     return 0;
 }
 

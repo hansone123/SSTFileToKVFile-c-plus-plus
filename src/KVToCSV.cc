@@ -39,7 +39,7 @@ void kvToCSV::createOuputFolder(string p) {
     if ( !(dir = opendir(p.c_str())) )
         mkdir(p.c_str(), 0777);
 }
-string kvToCSV::getInputFile() {
+string kvToCSV::chooseInputFile() {
     return this->inPath + "";
 }
 
@@ -51,14 +51,17 @@ int kvToCSV::outputCSV() {
     cout<<"outPath:"<<out_path<<endl;
     
     kvFile kf;                                  //open kvFile
-    if (!kf.openFile(out_path))
+    if (!kf.openFile(out_path)) {
+        cout<<file_name<<" create failed."<<endl;
         return 1;
+    }
     
     KVProvider *kvp = KVProvider::KVPfactory(); //open KVprovider
     int sz;
     char *s;
-    if (!kvp->init(this->getInputFile()))
+    if (!kvp->init(this->chooseInputFile())) {
         return 1;
+    }
     do {
         s = kvp->getKey(sz);
         kf.writeToFile(s, sz);

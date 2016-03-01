@@ -16,6 +16,8 @@
 #include "Varint64.h"
 #include <string.h>
 #include <cstdlib>
+#include <iostream>
+
 using namespace std;
 
 char *kvFile::addHeader(int& o_sz, char* i_s, int i_sz) {

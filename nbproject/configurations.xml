@@ -3,6 +3,8 @@
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="." name="0">
       <df name="src">
+        <in>FileObserver.cc</in>
+        <in>FileObserver.h</in>
         <in>KVProvider.cc</in>
         <in>KVToCSV.cc</in>
         <in>LevelDBKVProvider.cc</in>
@@ -12,6 +14,7 @@
         <in>kvFile.h</in>
       </df>
       <df name="test">
+        <in>main.cc</in>
         <in>testKVProvider.cc</in>
         <in>testKVToCSV.cc</in>
         <in>testVarint.cc</in>
@@ -56,6 +59,10 @@
           <preBuildCommand></preBuildCommand>
         </preBuild>
       </makefileType>
+      <item path="src/FileObserver.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/FileObserver.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/KVProvider.cc" ex="false" tool="1" flavor2="4">
       </item>
       <item path="src/KVToCSV.cc" ex="false" tool="1" flavor2="0">
@@ -69,6 +76,8 @@
       <item path="src/kvFile.cc" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/kvFile.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test/main.cc" ex="false" tool="1" flavor2="0">
       </item>
       <item path="test/testKVProvider.cc" ex="false" tool="1" flavor2="4">
       </item>

@@ -31,7 +31,7 @@ public:
 private:
     string getTime();
     string genCSVFileName();
-    string getInputFile();  
+    string chooseInputFile();  
     void setInputPath(string path);
     void setOutputFolder(string path);
     void createOuputFolder(string p);
