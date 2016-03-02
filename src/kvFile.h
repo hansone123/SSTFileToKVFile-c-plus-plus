@@ -28,7 +28,7 @@ private:
 public:
     
     bool openFile(string name);
-    void writeToFile(char *i_s, int i_sz);
+    void addHeaderAndWriteToFile(char *i_s, int i_sz);
     void close();
     kvFile();
     kvFile(const kvFile& orig);

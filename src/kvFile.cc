@@ -42,7 +42,7 @@ bool kvFile::openFile(string name) {
     return true;
 }
 
-void kvFile::writeToFile(char *i_s, int i_sz) {
+void kvFile::addHeaderAndWriteToFile(char *i_s, int i_sz) {
     int o_sz;
     char* o_s = this->addHeader(o_sz, i_s , i_sz);    //add varint about string-size 
     this->file.write(o_s, o_sz);

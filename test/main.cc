@@ -21,11 +21,12 @@ using namespace std;
  */
 int main(int argc, char** argv) {
     
-    FileObserver *fs = new FileObserver();
-    if (!fs->setValidDirectoryPath("/tmp/SSTFiles"))
+    FileObserver *sstfileObserver = new FileObserver();
+    if (!sstfileObserver->setValidDirectoryPath("/tmp/SSTFiles"))
         return 1;
-    fs->keepWatchOnDirectoryAndDoJob();
-    delete fs;
+    sstfileObserver->keepWatchOnDirectoryAndDoJob();
+    delete sstfileObserver;
+    
     return 0;
 }
 

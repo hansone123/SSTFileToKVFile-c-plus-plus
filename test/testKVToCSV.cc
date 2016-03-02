@@ -22,10 +22,10 @@ using namespace std;
  */
 int main(int argc, char** argv) {
     
-    kvToCSV kvt;
-    kvt.init();
-    
-    if (kvt.outputCSV() != 0 ) {
+    kvToCSV *kvt = new kvToCSV();
+    kvt->setInputFilePath("testdb");
+    kvt->setOutputFolder("/tmp/KVoutput/");
+    if (kvt->outputCSV() != 0 ) {
         cout<<"output kvfile failed!";
     }else {
         cout<<"output kvfile success!";

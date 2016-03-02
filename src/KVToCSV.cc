@@ -22,12 +22,7 @@ kvToCSV::kvToCSV() {
     this->num = 1;
     this->nowTime = this->getTime();
 }
-bool kvToCSV::init() {
-    setInputPath("testdb");
-    setOutputFolder("/tmp/KVoutput/");
-    return true;
-}
-void kvToCSV::setInputPath(string p) {
+void kvToCSV::setInputFilePath(string p) {
     this->inPath = p;
 }
 void kvToCSV::setOutputFolder(string p) {
@@ -46,15 +41,11 @@ string kvToCSV::chooseInputFile() {
 int kvToCSV::outputCSV() {
     
     string file_name = this->genCSVFileName();
-    string out_path = this->outPath + file_name;
+    string out_path = this->outPath + "/" +  file_name;
     cout<<"kvfile name:"<<file_name<<endl;
     cout<<"outPath:"<<out_path<<endl;
     
-    kvFile kf;                                  //open kvFile
-    if (!kf.openFile(out_path)) {
-        cout<<file_name<<" create failed."<<endl;
-        return 1;
-    }
+    
     
     KVProvider *kvp = KVProvider::KVPfactory(); //open KVprovider
     int sz;
@@ -62,14 +53,21 @@ int kvToCSV::outputCSV() {
     if (!kvp->init(this->chooseInputFile())) {
         return 1;
     }
+    
+    kvFile kf;                                  //open kvFile
+    if (!kf.openFile(out_path)) {
+        cout<<file_name<<" create failed."<<endl;
+        return 1;
+    }
+    
     do {
         s = kvp->getKey(sz);
-        kf.writeToFile(s, sz);
+        kf.addHeaderAndWriteToFile(s, sz);
 //        cout<<"key: ";
 //        show(s, sz);
 //        cout<<endl;
         s = kvp->getValue(sz);
-        kf.writeToFile(s, sz);
+        kf.addHeaderAndWriteToFile(s, sz);
 //        cout<<"value: ";
 //        show(s, sz);
 //        cout<<endl;

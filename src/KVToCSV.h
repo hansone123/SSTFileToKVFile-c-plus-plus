@@ -25,15 +25,17 @@ private:
     string inPath;
 public:
     kvToCSV();
-    bool init();    
+    bool init();
+    void setInputFilePath(string path); 
+    void setOutputFolder(string path);
     int outputCSV();    
     
 private:
     string getTime();
     string genCSVFileName();
     string chooseInputFile();  
-    void setInputPath(string path);
-    void setOutputFolder(string path);
+    
+    
     void createOuputFolder(string p);
     
 };

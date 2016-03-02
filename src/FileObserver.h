@@ -27,7 +27,8 @@ public:
     string chooseFile();
     void doJob(string fileName);
     bool dirIsEmpty();
-    bool keepWatchOnDirectoryAndDoJob();
+    bool deleteFile(string fileName);
+    void keepWatchOnDirectoryAndDoJob();
     FileObserver();
     FileObserver(const FileObserver& orig);
     virtual ~FileObserver();
