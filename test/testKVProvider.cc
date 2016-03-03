@@ -17,7 +17,7 @@ void show(char *z, int n);
 int main(int argc, char** argv) {    
     
     for (int i=0; i<10; i++) {
-        KVProvider *kvp = KVProvider::KVPfactory();
+        KVProvider *kvp = KVProviderFactory::makeKVProvider();
         int sz;
         char *s;
         if (kvp->init("testdb")) {
@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
         //        cout<<endl;
 
             }while( kvp->next() );
-        KVProvider::Kill(kvp);
+        kvp->close();
         }        
     }    
 }

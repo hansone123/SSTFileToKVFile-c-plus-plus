@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
     
     kvToCSV *kvt = new kvToCSV();
     kvt->setInputFilePath("testdb");
-    kvt->setOutputFolder("/tmp/KVoutput/");
+    kvt->setOutputDirectory("/tmp/KVoutput/");
     if (kvt->outputCSV() != 0 ) {
         cout<<"output kvfile failed!";
     }else {

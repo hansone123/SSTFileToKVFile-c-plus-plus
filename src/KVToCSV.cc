@@ -20,43 +20,39 @@ void show(char *z, int n);
 
 kvToCSV::kvToCSV() {
     this->num = 1;
-    this->nowTime = this->getTime();
 }
 void kvToCSV::setInputFilePath(string p) {
-    this->inPath = p;
+    this->inputFilePath = p;
 }
-void kvToCSV::setOutputFolder(string p) {
-    this->createOuputFolder(p);
-    this->outPath = p;
+void kvToCSV::setOutputDirectory(string p) {
+    this->createOuputDirectory(p);
+    this->outputDirectoryPath = p;
 }
-void kvToCSV::createOuputFolder(string p) {
-    DIR *dir;
-    if ( !(dir = opendir(p.c_str())) )
-        mkdir(p.c_str(), 0777);
-}
-string kvToCSV::chooseInputFile() {
-    return this->inPath + "";
+void kvToCSV::createOuputDirectory(string dirName) {
+    DIR *dir = opendir(dirName.c_str());
+    if ( !dir ) {
+        mkdir(dirName.c_str(), 0777);
+    }else {
+        closedir(dir);
+    }
 }
 
 int kvToCSV::outputCSV() {
     
-    string file_name = this->genCSVFileName();
-    string out_path = this->outPath + "/" +  file_name;
-    cout<<"kvfile name:"<<file_name<<endl;
-    cout<<"outPath:"<<out_path<<endl;
+    string outputFileName = this->genCSVFileName();
+    cout<<"kvfile name:"<<outputFileName<<endl;
     
     
-    
-    KVProvider *kvp = KVProvider::KVPfactory(); //open KVprovider
+    KVProvider *kvp = KVProviderFactory::makeKVProvider(); //open KVprovider
     int sz;
     char *s;
-    if (!kvp->init(this->chooseInputFile())) {
+    if (!kvp->init(this->inputFilePath)) {
         return 1;
     }
     
     kvFile kf;                                  //open kvFile
-    if (!kf.openFile(out_path)) {
-        cout<<file_name<<" create failed."<<endl;
+    if (!kf.openFile(outputFileName)) {
+        cout<<outputFileName<<" create failed."<<endl;
         return 1;
     }
     
@@ -74,43 +70,50 @@ int kvToCSV::outputCSV() {
         
     }while( kvp->next() );
     
-    KVProvider::Kill(kvp);      //close KVprovider
     kf.close();                 //close kvFile
+    kvp->close();      //close KVprovider
     
     return 0;
 }
-string kvToCSV::getTime() {
+string kvToCSV::getOSTime() {
     time_t t = time(0);
     char buf[64];
     strftime( buf, sizeof(buf), "%Y_%m_%d_%X",localtime(&t) );
-    string result;
-    result.assign(buf);
+    string result(buf);
+    
     return result;
 }
 string kvToCSV::genCSVFileName() {
-    
     string result;
-    string time = this->getTime();
-    string curtime = this->nowTime;
-    
-    if ( time.compare(curtime)>0 ) {
-        this->num = 1;
-        this->nowTime = time;
+    string tmpResult;
+    tmpResult = this->outputDirectoryPath + "//"  + this->getOSTime();
+    int num = 0;
+    char buf[64];
+    sprintf(buf, "%d",num);
+    string temp(buf);
+    result = tmpResult + "_" + temp;
+    while(this->isFileExisted(result + ".kv")) {
+        char buf2[64];
+        num++;
+        sprintf(buf2, "%d",num);
+        string temp2(buf2);
+        result = tmpResult + "_" + temp2;
     }
-        
-    int n = this->num;
-    this->num++;
-    
-    char str[256];
-    sprintf(str, "_%d", n);
-    result.assign(this->nowTime);
-    result.append(str);
-    result.append(".kv");
+    result = result + ".kv";
     
     return result;
     
 }
 
+bool kvToCSV::isFileExisted(string fileName) {
+    FILE* fp = fopen(fileName.c_str(), "r");
+    if (fp == NULL) {
+        return false;
+    }
+    fclose(fp);
+    
+    return true;
+}
 
 void show(char *z, int n){
      for (int i=0; i<n;i++)

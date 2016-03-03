@@ -14,7 +14,7 @@
         <in>kvFile.h</in>
       </df>
       <df name="test">
-        <in>main.cc</in>
+        <in>testFileObserver.cc</in>
         <in>testKVProvider.cc</in>
         <in>testKVToCSV.cc</in>
         <in>testVarint.cc</in>
@@ -77,7 +77,7 @@
       </item>
       <item path="src/kvFile.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="test/main.cc" ex="false" tool="1" flavor2="0">
+      <item path="test/testFileObserver.cc" ex="false" tool="1" flavor2="0">
       </item>
       <item path="test/testKVProvider.cc" ex="false" tool="1" flavor2="4">
       </item>

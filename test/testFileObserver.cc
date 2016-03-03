@@ -12,6 +12,7 @@
  */
 
 #include <cstdlib>
+#include <iostream>
 #include "../src/FileObserver.h"
 
 using namespace std;
@@ -25,6 +26,7 @@ int main(int argc, char** argv) {
     if (!sstfileObserver->setValidDirectoryPath("/tmp/SSTFiles"))
         return 1;
     sstfileObserver->keepWatchOnDirectoryAndDoJob();
+    
     delete sstfileObserver;
     
     return 0;

@@ -30,7 +30,10 @@ bool LevelDBKVProvider::init(string path) {
     
     return true;
 }
-
+void LevelDBKVProvider::close() {
+    if (this->db)
+        delete db;
+}
 bool LevelDBKVProvider::next() {
     this->it->Next();
     if (!this->it->Valid())
@@ -47,7 +50,7 @@ char* LevelDBKVProvider::getValue(int &v) {
     v = this->it->value().size();
     return (char*)this->it->value().data();
 }
-
 LevelDBKVProvider::~LevelDBKVProvider(){
-    delete this->db;
+    if (this->db)
+        delete this->db;
 }

@@ -20,23 +20,21 @@ using namespace std;
 class kvToCSV{
 private:
     int num;
-    string nowTime;
-    string outPath;
-    string inPath;
+    string outputDirectoryPath;
+    string inputFilePath;
 public:
     kvToCSV();
     bool init();
     void setInputFilePath(string path); 
-    void setOutputFolder(string path);
+    void setOutputDirectory(string path);
     int outputCSV();    
     
 private:
-    string getTime();
+    string getOSTime();
     string genCSVFileName();
     string chooseInputFile();  
-    
-    
-    void createOuputFolder(string p);
+    void createOuputDirectory(string p);
+    bool isFileExisted(string fileName);
     
 };
 

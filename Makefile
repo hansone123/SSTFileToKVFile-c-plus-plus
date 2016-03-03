@@ -26,8 +26,8 @@ liblptc.a: $(OBJ)
 
 test: $(TEST)
 	
-main$(EXE):
-	g++ -o $(TOP)/test/main$(EXE) $(TOP)/test/main.cc $(HDR) liblptc.a $(LIBPTHREAD) $(LIBLEVELDB)
+testFileObserver$(EXE):
+	g++ -o $(TOP)/test/testFileObserver$(EXE) $(TOP)/test/testFileObserver.cc $(HDR) liblptc.a $(LIBPTHREAD) $(LIBLEVELDB)
 #%$(EXE): $(TOP)/test/%.cc
 #	g++ -o $(TOP)/test/$@ -c $< $(HDR) liblptc.a $(LIBPTHREAD) $(LIBLEVELDB)
 testKVProvider$(EXE):

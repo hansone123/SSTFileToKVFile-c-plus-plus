@@ -15,6 +15,7 @@
 #define FILEOBSERVER_H
 
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -22,17 +23,20 @@ class FileObserver {
 private:
     string directoryPath;
 public:
-    void setDirectory(string path);
+    
     bool setValidDirectoryPath(string dirName);
+    
     string chooseFile();
     void doJob(string fileName);
-    bool dirIsEmpty();
     bool deleteFile(string fileName);
+    vector<string> getAllFileNamesInDirectory();
     void keepWatchOnDirectoryAndDoJob();
     FileObserver();
     FileObserver(const FileObserver& orig);
     virtual ~FileObserver();
 private:
+    void setDirectory(string path);
+    string getDirectoryPath();
     bool dirIsExisted(string dirName);
 };
 

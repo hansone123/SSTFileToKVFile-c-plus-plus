@@ -9,10 +9,6 @@
 
 using namespace std;
 
-KVProvider *KVProvider::KVPfactory() {
+KVProvider *KVProviderFactory::makeKVProvider() {
     return new LevelDBKVProvider();
-}
-void KVProvider::Kill(KVProvider *kvp) {
-    LevelDBKVProvider *lkvp = (LevelDBKVProvider*)kvp;
-    delete lkvp;
 }

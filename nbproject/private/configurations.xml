@@ -39,7 +39,7 @@
         <in>kvFile.h</in>
       </df>
       <df name="test">
-        <in>main.cc</in>
+        <in>testFileObserver.cc</in>
         <in>testKVProvider.cc</in>
         <in>testKVToCSV.cc</in>
         <in>testVarint.cc</in>

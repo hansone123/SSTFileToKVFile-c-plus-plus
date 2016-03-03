@@ -23,6 +23,7 @@ using namespace std;
 class LevelDBKVProvider : public KVProvider{
 public:
     bool init(string path);
+    void close();
     char* getKey(int &k);
     char* getValue(int &v);
     bool next();

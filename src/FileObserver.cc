@@ -21,6 +21,9 @@
 #include <stdio.h>
 using namespace std;
 
+string FileObserver::getDirectoryPath() {
+    return this->directoryPath;
+}
 void FileObserver::setDirectory(string directoryPath) {
     this->directoryPath = directoryPath;
 }
@@ -43,43 +46,54 @@ bool FileObserver::dirIsExisted(string directoryPath) {
 }
 string FileObserver::chooseFile() {
     
-    if (this->dirIsEmpty())
-        return NULL;
+    string resultFileName ="";
     
-    DIR *directory = opendir(this->directoryPath.c_str());
-    vector<string> files = vector<string>();
-    struct dirent *dirp;
-    while ((dirp = readdir(directory)) != NULL) {
-        string temp = string(dirp->d_name);
-        if ((temp.compare(".") > 0) && (temp.compare("..") > 0) ) {
-            files.push_back(temp);
-        }
+    vector<string> files = this->getAllFileNamesInDirectory();
+    if (files.size() == 0) {
+        cout<<"directory is empty ."<<endl;
+        return resultFileName;
     }
-    closedir(directory);
     
-    string resultFileName = files[0];
-    for(int i=0; i<files.size(); i++) {
-        cout<<files[i]<<endl;
+    resultFileName = files.front();
+    
+    for(int i=0; i<files.size(); i++) {;
         if (strcmp(resultFileName.c_str(), files[i].c_str()) >0) {
             resultFileName = files[i];
         }
     }
-    resultFileName = this->directoryPath + "//" + resultFileName;
-    cout<<"choose file :"<<resultFileName<<" ."<<endl;
+    resultFileName = this->getDirectoryPath() + "//" + resultFileName;
     
     return resultFileName;
 }
-
+vector<string> FileObserver::getAllFileNamesInDirectory() {
+    
+    vector<string> result;
+    string direcoryPath = this->getDirectoryPath();
+    DIR *directory = opendir(direcoryPath.c_str());
+    if (!directory) {
+        return result;
+    }
+    
+    struct dirent *dirp;
+    while ((dirp = readdir(directory)) != NULL) {
+        string temp = string(dirp->d_name);
+        if ((temp.compare(".") > 0) && (temp.compare("..") > 0) ) {
+            result.push_back(temp);
+        }
+    }
+    closedir(directory);
+    
+    return result;
+    
+}
 void FileObserver::doJob(string fileName) {
     
     kvToCSV kvt;
-    kvt.setInputFilePath("testdb");
-    kvt.setOutputFolder("/tmp/KVoutput");
+    kvt.setInputFilePath(fileName);
+    kvt.setOutputDirectory("/tmp/KVoutput");
     
     if (kvt.outputCSV() != 0 ) {
-        cout<<"output "<<fileName<<" failed.";
-    }else {
-        cout<<"output "<<fileName<<" to KVfile."<<endl;
+        cout<<"output "<<fileName<<" failed."<<endl;
     }
     
 }
@@ -87,13 +101,11 @@ void FileObserver::doJob(string fileName) {
 void FileObserver::keepWatchOnDirectoryAndDoJob() {
     while(true) {
         string fileName = this->chooseFile();
-        if (fileName ==NULL) {
-            continue;
-        }
-            
-        this->doJob(fileName);
-        this->deleteFile(fileName);
-        break;
+        
+        if (fileName != "") {
+            this->doJob(fileName);
+            this->deleteFile(fileName);
+        }            
     }
 }
 bool FileObserver::deleteFile(string fileName) {
@@ -104,15 +116,7 @@ bool FileObserver::deleteFile(string fileName) {
     cout<<"Delete "<<fileName<<" :"<<flag<<"  ."<<endl;
     return true;
 }
-bool FileObserver::dirIsEmpty() {
-    DIR *dirPointer;
-    if ((dirPointer = opendir(this->directoryPath.c_str()))) {
-        return false;
-    }
-    closedir(dirPointer);
-    
-    return true;
-}
+
 FileObserver::FileObserver() {
 }
 
