@@ -20,6 +20,8 @@
           <in>write_batch.h</in>
         </df>
       </df>
+      <df name="obj">
+      </df>
       <df name="src">
         <in>FileObserver.cc</in>
         <in>FileObserver.h</in>
