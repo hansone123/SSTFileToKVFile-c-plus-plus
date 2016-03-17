@@ -5,10 +5,11 @@
  */
 #include "KVProvider.h"
 #include "LevelDBKVProvider.h"
+#include "SSTFileKVProvider.h"
 #include <iostream>
 
 using namespace std;
 
 KVProvider *KVProviderFactory::makeKVProvider() {
-    return new LevelDBKVProvider();
+    return new SSTFileKVProvider();
 }

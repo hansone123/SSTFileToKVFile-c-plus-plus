@@ -18,21 +18,21 @@
 
 using namespace std;
 
-
-class KVProvider{
+class KVProvider {
 public:
-    virtual bool init(string path)=0;
-    virtual void close()=0;
-    virtual char* getKey(int &k)=0;
-    virtual char* getValue(int &v)=0;
-    virtual bool next()=0;
-    
+	virtual bool init(string path) = 0;
+	virtual void close() = 0;
+	virtual char* getKey(int &k)const = 0;
+	virtual char* getValue(int &v)const = 0;
+	virtual bool next() = 0;
+
 private:
 };
+
 class KVProviderFactory {
 public:
-    static KVProvider *makeKVProvider();
-    
+	static KVProvider *makeKVProvider();
+
 };
 
 #endif /* KVPROVIDER_H */
