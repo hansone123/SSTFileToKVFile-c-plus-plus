@@ -23,7 +23,13 @@ using namespace std;
 int main(int argc, char** argv) {
     
     FileObserver *sstfileObserver = new FileObserver();
-    if (!sstfileObserver->setValidDirectoryPath("/tmp/SSTFiles"))
+    string dirWatched;
+    if (argc == 2) {
+        dirWatched = string(argv[1]);
+    } else {
+        cout<<"Need one parameter : directoryPath"<<endl;
+    }
+    if (!sstfileObserver->setValidDirectoryPath(dirWatched))
         return 1;
     sstfileObserver->keepWatchOnDirectoryAndDoJob();
     

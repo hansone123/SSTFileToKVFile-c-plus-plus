@@ -50,7 +50,7 @@ string FileObserver::chooseFile() {
     
     vector<string> files = this->getAllFileNamesInDirectory();
     if (files.size() == 0) {
-        cout<<"directory is empty ."<<endl;
+//        cout<<"directory is empty ."<<endl;
         return resultFileName;
     }
     
