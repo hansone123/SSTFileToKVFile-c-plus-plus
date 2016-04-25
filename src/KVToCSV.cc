@@ -78,7 +78,7 @@ int kvToCSV::outputCSV() {
 string kvToCSV::getOSTime() {
     time_t t = time(0);
     char buf[64];
-    strftime( buf, sizeof(buf), "%Y_%m_%d_%X",localtime(&t) );
+    strftime( buf, sizeof(buf), "%Y%m%d",localtime(&t) );
     string result(buf);
     
     return result;

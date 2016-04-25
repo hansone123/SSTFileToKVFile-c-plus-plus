@@ -5,6 +5,8 @@
       <df name="src">
         <in>FileObserver.cc</in>
         <in>FileObserver.h</in>
+        <in>Job.cc</in>
+        <in>Job.h</in>
         <in>KVProvider.cc</in>
         <in>KVToCSV.cc</in>
         <in>LevelDBKVProvider.cc</in>
@@ -64,6 +66,10 @@
       <item path="src/FileObserver.cc" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/FileObserver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Job.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Job.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/KVProvider.cc" ex="false" tool="1" flavor2="4">
       </item>

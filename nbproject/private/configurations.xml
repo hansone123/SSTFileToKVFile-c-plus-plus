@@ -7,6 +7,8 @@
       <df name="src">
         <in>FileObserver.cc</in>
         <in>FileObserver.h</in>
+        <in>Job.cc</in>
+        <in>Job.h</in>
         <in>KVProvider.cc</in>
         <in>KVProvider.h</in>
         <in>KVToCSV.cc</in>

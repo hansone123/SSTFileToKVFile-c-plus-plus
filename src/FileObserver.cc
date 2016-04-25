@@ -86,14 +86,14 @@ vector<string> FileObserver::getAllFileNamesInDirectory() {
     return result;
     
 }
-void FileObserver::doJob(string fileName) {
+void FileObserver::doJob(string filePath) {
     
     kvToCSV kvt;
-    kvt.setInputFilePath(fileName);
+    kvt.setInputFilePath(filePath);
     kvt.setOutputDirectory("/tmp/KVoutput");
     
     if (kvt.outputCSV() != 0 ) {
-        cout<<"output "<<fileName<<" failed."<<endl;
+        cout<<"output "<<filePath<<" failed."<<endl;
     }
     
 }
