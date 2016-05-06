@@ -59,14 +59,17 @@ int kvToCSV::outputCSV() {
     do {
         s = kvp->getKey(sz);
         kf.addHeaderAndWriteToFile(s, sz);
-//        cout<<"key: ";
-//        show(s, sz);
-//        cout<<endl;
+        
+        cout<<"key: ";
+        show(s, sz);
+        cout<<endl;
+        
         s = kvp->getValue(sz);
         kf.addHeaderAndWriteToFile(s, sz);
-//        cout<<"value: ";
-//        show(s, sz);
-//        cout<<endl;
+        
+        cout<<"value: ";
+        show(s, sz);
+        cout<<endl;
         
     }while( kvp->next() );
     
@@ -78,7 +81,7 @@ int kvToCSV::outputCSV() {
 string kvToCSV::getOSTime() {
     time_t t = time(0);
     char buf[64];
-    strftime( buf, sizeof(buf), "%Y%m%d",localtime(&t) );
+    strftime( buf, sizeof(buf), "%Y%m%d%H%M%S",localtime(&t) );
     string result(buf);
     
     return result;
@@ -118,4 +121,7 @@ bool kvToCSV::isFileExisted(string fileName) {
 void show(char *z, int n){
      for (int i=0; i<n;i++)
         printf("%x,",z[i]);
+     printf("\n");
+     for (int i=0; i<n;i++)
+        printf("%c,",z[i]);
 }

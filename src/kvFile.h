@@ -34,7 +34,8 @@ public:
     kvFile(const kvFile& orig);
     virtual ~kvFile();
 private:
-    char *addHeader(int &o_sz, char* i_s, int i_sz);
+    void writeOutHeader(int i_sz);
+    void writeOutData(char data[], int data_size);
 };
 
 #endif /* KVFILE_H */

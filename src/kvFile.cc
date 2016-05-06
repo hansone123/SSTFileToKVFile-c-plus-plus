@@ -20,21 +20,17 @@
 
 using namespace std;
 
-char *kvFile::addHeader(int& o_sz, char* i_s, int i_sz) {
-    char hdr_buf[9];
-    int hdr_sz;
+void kvFile::writeOutHeader(int size) {
+    char header[9];
+    int header_size;
     
-    hdr_sz = Varint::uint64ToVarint((uchar*)hdr_buf, i_sz);
-    
-    int o_size = i_sz+hdr_sz;
-    char *o_s = new char[o_size];
-    strncpy(o_s, hdr_buf, hdr_sz);                   //copy hdr
-    strncpy(o_s + hdr_sz, i_s, i_sz);                //copy string
-    o_sz = o_size;
-    
-    return  o_s;
+    header_size = Varint::uint64ToVarint((uchar*)header, size);
+    this->file.write(header, header_size);
 }
-
+void kvFile::writeOutData(char data[], int data_size) {
+       
+    this->file.write(data, data_size);
+}
 bool kvFile::openFile(string name) {
     this->file.open(name.c_str(), ios::out | ios::trunc);
     if (!this->file)
@@ -42,10 +38,10 @@ bool kvFile::openFile(string name) {
     return true;
 }
 
-void kvFile::addHeaderAndWriteToFile(char *i_s, int i_sz) {
-    int o_sz;
-    char* o_s = this->addHeader(o_sz, i_s , i_sz);    //add varint about string-size 
-    this->file.write(o_s, o_sz);
+void kvFile::addHeaderAndWriteToFile(char *data, int data_size) {
+    
+    this->writeOutHeader(data_size);    //add varint about string-size 
+    this->writeOutData(data, data_size);
 }
 void kvFile::close() {
     if (this->file) {
